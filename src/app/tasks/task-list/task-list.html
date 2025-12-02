@@ -1,0 +1,9 @@
+<h1>Liste des tâches</h1>
+
+<ul>
+@for (task of tasks; track task.title) {
+  <li>{{ task.title }} - {{ task.status }}</li>
+} @empty {
+  <li>Aucune tâche à afficher</li>
+}
+</ul>
