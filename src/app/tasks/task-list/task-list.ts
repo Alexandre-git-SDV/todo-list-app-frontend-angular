@@ -21,6 +21,10 @@ export class TaskList {
 
   constructor(private taskService: TaskService) {}
 
+  onTaskSelected(task: Task) {
+    console.log('Tâche sélectionnée :', task.id);
+  }
+
   ngOnInit() {
     this.tasks = this.taskService.getAllTasks();
   }

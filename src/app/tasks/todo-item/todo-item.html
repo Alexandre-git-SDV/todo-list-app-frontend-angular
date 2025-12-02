@@ -2,16 +2,11 @@
   <p>{{ task.title }}</p>
   <button (click)="onClick()"> Action </button>
   <small>Statut : {{ task.status ? 'Terminée' : 'En cours' }}</small>
-</div>
+  <button class="delete" (click)="onDelete()"> Supprimer </button>
 
-<div class="item">
   <span
     class="title"
     [class.done]="task.status === 'terminée'"
-    (click)="onToggle()"
-  >
-    {{ task.title }}
+    (click)="onToggle()">
   </span>
-
-  <button class="delete" (click)="onDelete()"> Supprimer </button>
 </div>
