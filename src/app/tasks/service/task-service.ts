@@ -6,7 +6,7 @@ import { Task } from '../models/task';
 })
 export class TaskService {
   private tasks: Task[] = [
-    { id: 1, title: 'Réécrire " Doit-on apprendre ?" ', status: 'à faire' },
+    { id: 1, title: 'Réécrire" ', status: 'à faire' },
     { id: 2, title: 'Tourner', status: 'à faire' },
     { id: 3, title: 'Monter', status: 'à faire' },
     { id: 4, title: 'Poster', status: 'à faire' },

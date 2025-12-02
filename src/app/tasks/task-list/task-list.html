@@ -11,8 +11,50 @@
 
 
 <h2> Partie 2</h2>
-<app-todo-item
-  *ngFor="let task of tasks"
-  [task]="task"
-  (select)="onTaskSelected($event)">
-</app-todo-item>
+
+<h2>{{ TaskListTitle }}</h2>
+
+<div class="add-container">
+  <input
+    type="text"
+    placeholder="Nouvelle tâche"
+    [(ngModel)]="newTaskTitle"
+  />
+
+  <button (click)="addTask()">Ajouter</button>
+</div>
+
+<ul>
+  <li *ngFor="let task of tasks">
+    <app-todo-item
+      [task]="task"
+      (delete)="deleteTask(task.id)"
+      (toggle)="toggleTask(task.id)"
+    ></app-todo-item>
+  </li>
+</ul>
+
+
+<h2> Partie 3</h2>
+
+<h2>{{ TaskListTitle }}</h2>
+
+<div class="add-container">
+  <input
+    type="text"
+    placeholder="Nouvelle tâche"
+    [(ngModel)]="newTaskTitle"
+  />
+
+  <button (click)="addTask()">Ajouter</button>
+</div>
+
+<ul>
+  <li *ngFor="let task of tasks">
+    <app-todo-item
+      [task]="task"
+      (delete)="deleteTask($event)"
+      (toggle)="toggleTask($event)"
+    ></app-todo-item>
+  </li>
+</ul>
