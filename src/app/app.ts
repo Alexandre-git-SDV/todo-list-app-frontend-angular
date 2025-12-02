@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TaskList } from './tasks/task-list/task-list';
-import { Task } from './tasks/models/task';
+import { TodoItem } from './tasks/todo-item/todo-item';
 
 @Component({
   selector: 'app-root',
