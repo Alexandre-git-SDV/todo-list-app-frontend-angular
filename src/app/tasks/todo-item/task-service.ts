@@ -1,53 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
+import { CreateTaskDto } from '../models/create-task-dto';
+import { TaskApiService } from '../service/task-api-service';
+import { TaskStore } from '../store/task-store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private tasks: Task[] = [
-    { id: 1, title: 'Réécrire', status: 'à faire' },
-    { id: 2, title: 'Tourner', status: 'à faire' },
-    { id: 3, title: 'Monter', status: 'à faire' },
-    { id: 4, title: 'Poster', status: 'à faire' },
-  ];
+  
+  constructor(
+    private apiService: TaskApiService,
+    private taskStore: TaskStore) {}
 
-  getAllTasks(): Task[] {
-    return [...this.tasks];
+
+  loadAllTasks() {
+    this.apiService.getAllTasks().subscribe(tasks => {
+      this.taskStore.setTasks(tasks);
+    });
+  }
+  
+  get tasks$() {
+    return this.taskStore.task$;
   }
 
-  add(task: { title: string }) {
-    const newTask: Task = {
-      id: this.tasks.length + 1,
-      title: task.title,
-      status: 'à faire',
-    };
+  setTasks(tasks: Task[]) {
+    this.taskStore.setTasks(tasks);
+  }
 
-    this.tasks.push(newTask);
-    return newTask;
+  add(task: CreateTaskDto) {
+    this.apiService.add(task).subscribe(updatedTasks => {
+      this.taskStore.setTasks(updatedTasks);
+    });
   }
 
   updateTitle(taskId: number, newTitle: string) {
-    const task = this.tasks.find(t => t.id === taskId);
-    if (task) task.title = prompt("Entrer le nouveau nom:", newTitle) || task.title;
+    this.apiService.updateTitle(taskId, newTitle).subscribe(updatedTasks => {
+      this.taskStore.setTasks(updatedTasks);
+    });
   }
 
   toggleStatus(taskId: number) {
-    const task = this.tasks.find(t => t.id === taskId);
-    if (!task) return;
-
-    if (task.status === 'à faire') {
-      task.status = 'en cours';
-
-    } else if (task.status === 'en cours') {
-      task.status = 'terminée';
-    } else if (task.status === 'terminée') {
-      task.status = 'à faire';
-    }
-  console.log('Tâche sélectionnée et changé:', task.id);
+    this.apiService.toggleStatus(taskId).subscribe(updatedTasks => {
+      this.taskStore.setTasks(updatedTasks);
+    });
   }
 
   delete(taskId: number) {
-    this.tasks = this.tasks.filter(t => t.id !== taskId);
+    this.apiService.delete(taskId).subscribe(updatedTasks => {
+      this.taskStore.setTasks(updatedTasks);
+    });
   }
 }
