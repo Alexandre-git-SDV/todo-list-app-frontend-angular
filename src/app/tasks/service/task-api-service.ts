@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
 import { TaskState } from '../models/task-state.enum';
 import { delay, Observable, of, pipe } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

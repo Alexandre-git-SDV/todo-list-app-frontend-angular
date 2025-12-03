@@ -8,3 +8,24 @@
     border-bottom: 1px solid #be3030;
     justify-content: space-between;
 }
+
+.todo-item:hover {
+    box-shadow: #0056b3 0 0 5px;
+    transition: 0.2s;
+    transform: scale(1.01);
+}
+
+
+button {
+    font-family: Outfit, sans-serif;
+    cursor: pointer;
+    border: black solid 1px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: #0056b3 0 0 10px;
+    color: white;
+    transition: 0.2s;
+    transform: scale(1.05);
+}

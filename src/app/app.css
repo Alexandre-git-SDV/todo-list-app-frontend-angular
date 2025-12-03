@@ -2,3 +2,27 @@
     align-items: center;
     font-family: Outfit, sans-serif;
 }
+
+h1, h2 {
+    text-align: center;
+}
+
+h1, h2 :hover {
+    color: #0056b3;
+    transition: 0.2s;
+    cursor: pointer;
+    text-shadow: #756bff 1px 0 10px;
+}
+
+button {
+    font-family: Outfit, sans-serif;
+    cursor: pointer;
+    border: royalblue 2px solid;
+}
+
+button:hover {
+    background-color: #0080ff;
+    color: white;
+    transition: 0.2s;
+    transform: scale(1.05);
+}
