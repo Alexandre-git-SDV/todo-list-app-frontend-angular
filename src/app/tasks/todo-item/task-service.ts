@@ -29,14 +29,22 @@ export class TaskService {
 
   updateTitle(taskId: number, newTitle: string) {
     const task = this.tasks.find(t => t.id === taskId);
-    if (task) task.title = newTitle;
+    if (task) task.title = prompt("Entrer le nouveau nom:", newTitle) || task.title;
   }
 
   toggleStatus(taskId: number) {
     const task = this.tasks.find(t => t.id === taskId);
     if (!task) return;
 
-    task.status = task.status === 'à faire' ? 'terminée' : 'à faire';
+    if (task.status === 'à faire') {
+      task.status = 'en cours';
+
+    } else if (task.status === 'en cours') {
+      task.status = 'terminée';
+    } else if (task.status === 'terminée') {
+      task.status = 'à faire';
+    }
+  console.log('Tâche sélectionnée et changé:', task.id);
   }
 
   delete(taskId: number) {

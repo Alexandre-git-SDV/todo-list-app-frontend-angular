@@ -1,12 +1,13 @@
 <div class="todo-item">
   <p>{{ task.title }}</p>
-  <button (click)="onClick()"> Action </button>
-  <small>Statut : {{ task.status ? 'Terminée' : 'En cours' }}</small>
+  <button (click)="onToggle()"> Action </button>
+  <button (click)="onEdit()"> Modifier </button>
+  <small>Statut : {{ task.status }}</small> <!--task.status ? 'Terminée' : 'En cours'-->
   <button class="delete" (click)="onDelete()"> Supprimer </button>
-
-  <span
-    class="title"
-    [class.done]="task.status === 'terminée'"
-    (click)="onToggle()">
-  </span>
 </div>
+
+
+<!-- <span
+    class="title"
+    [class.done]="task.status">
+  </span> -->
