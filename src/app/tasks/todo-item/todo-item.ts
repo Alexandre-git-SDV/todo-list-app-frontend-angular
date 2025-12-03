@@ -12,6 +12,7 @@ export class TodoItem {
   @Input() task!: Task;
   @Output() select = new EventEmitter<Task>();
 
+  @Output() edit = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<number>();
   @Output() toggle = new EventEmitter<number>();
 
@@ -21,6 +22,10 @@ export class TodoItem {
 
   onDelete() {
     this.delete.emit(this.task.id);
+  }
+
+  onEdit() {
+    this.edit.emit(this.task);
   }
 
   onToggle() {

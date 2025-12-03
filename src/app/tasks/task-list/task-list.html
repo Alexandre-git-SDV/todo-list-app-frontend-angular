@@ -29,6 +29,7 @@
     <app-todo-item
       [task]="task"
       (select)="onTaskSelected(task)"
+      (edit)="updateTaskTitle(task.id, newTitle)"
       (delete)="deleteTask(task.id)"
       (toggle)="toggleTask(task.id)"
     ></app-todo-item>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { TaskService } from '../service/task-service';
+import { TaskService } from '../todo-item/task-service';
 import { Task } from '../models/task';
 import { TodoItem } from '../todo-item/todo-item';
 
@@ -18,6 +18,7 @@ export class TaskList {
   TaskListTitle = 'Ma liste de tâches';
   tasks: Task[] = [];
   newTaskTitle = '';
+  newTitle = '';
 
   constructor(private taskService: TaskService) {}
 
@@ -27,6 +28,7 @@ export class TaskList {
 
   ngOnInit() {
     this.tasks = this.taskService.getAllTasks();
+    console.log('Tâches Affichées :', this.tasks);
   }
 
   addTask() {
@@ -35,11 +37,19 @@ export class TaskList {
     this.taskService.add({ title: this.newTaskTitle });
     this.tasks = this.taskService.getAllTasks();
     this.newTaskTitle = '';
+    console.log('Tâche ajoutée :', this.newTaskTitle);
+  }
+
+  updateTaskTitle(taskId: number, newTitle: string) {
+    this.taskService.updateTitle(taskId, newTitle);
+    this.tasks = this.taskService.getAllTasks();
+    console.log('Tâche mise à jour :', taskId, newTitle);
   }
 
   deleteTask(id: number) {
     this.taskService.delete(id);
     this.tasks = this.taskService.getAllTasks();
+    console.log('Tâche supprimée :', id);
   }
 
   toggleTask(id: number) {
