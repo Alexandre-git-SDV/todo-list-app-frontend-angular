@@ -1,31 +1,77 @@
-* {
-    display: flex;
-    align-items: center;
+/* Le composant lui-même */
+:host {
+  display: block;
 }
+
+/* Carte de tâche */
 
 .todo-item {
-    flex-wrap: wrap;
-    border-bottom: 1px solid #be3030;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  border-bottom: 1px solid #be3030;
+  padding: 0.5rem 0;
+
+  transition: 0.2s;
 }
 
+/* Hover sur la carte (tes valeurs d’origine) */
 .todo-item:hover {
-    box-shadow: #0056b3 0 0 5px;
-    transition: 0.2s;
-    transform: scale(1.01);
+  box-shadow: #0056b3 0 0 5px;
+  transition: 0.2s;
+  transform: scale(1.01);
 }
 
+/* Texte */
 
-button {
-    font-family: Outfit, sans-serif;
-    cursor: pointer;
-    border: black solid 1px;
+.todo-item p,
+.todo-item small {
+  margin: 0;
+  color: var(--text-color);
 }
 
-button:hover {
-    background-color: #0056b3;
-    box-shadow: #0056b3 0 0 10px;
-    color: white;
-    transition: 0.2s;
-    transform: scale(1.05);
+.todo-item small {
+  opacity: 0.8;
+}
+
+/* Boutons */
+
+.todo-item button {
+  font-family: Outfit, sans-serif;
+  cursor: pointer;
+  border: black solid 1px;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  background: transparent;
+  transition: 0.2s;
+}
+
+/* Hover : je garde exactement ton style (#0056b3 + box-shadow) */
+.todo-item button:hover {
+  background-color: #0056b3;
+  box-shadow: #0056b3 0 0 10px;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Bouton supprimer avec bord rouge (optionnel mais sympa) */
+.todo-item button.delete {
+  border-color: #be3030;
+}
+
+/* Responsive : sur mobile on met tout en colonne */
+
+@media (max-width: 600px) {
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .todo-item button {
+    width: 100%;
+    text-align: center;
+  }
 }

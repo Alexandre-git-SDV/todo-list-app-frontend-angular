@@ -1,41 +1,80 @@
+/* Titres de la section */
+
 h1 {
-    color: #0080ff;
+  color: #0080ff;
 }
 
 h1:hover {
-    color: #0056b3;
-    transition: 0.2s;
-    cursor: pointer;
-    text-shadow: #756bff 1px 0 10px;
+  color: #0056b3;
+  transition: 0.2s;
+  cursor: pointer;
+  text-shadow: #756bff 1px 0 10px;
 }
 
 h2 {
-    color: #0e3863;
+  color: #0e3863;
 }
 
 h2:hover {
-    color: #0a2a4a;
-    transition: 0.2s;
-    cursor: pointer;
-    text-shadow: #4a5a8a 1px 0 10px;
+  color: #0056b3;
+  transition: 0.2s;
+  cursor: pointer;
+  text-shadow: #756bff 1px 0 10px;
 }
 
-ul :hover {
-    background-color: transparent;
-    box-shadow: #0056b3 0 0 5px;
-    transition: 0.2s;
+/* Conteneur global de la liste */
+
+:host {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+/* UL en GRID = items côte à côte */
+
+ul {
+  list-style: none;
+  margin: 1rem 0 2rem;
+  padding: 0;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Chaque LI devient une "carte" */
+
+li {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+/* Bouton Ajouter */
 
 button {
     font-family: Outfit, sans-serif;
     cursor: pointer;
     border: black solid 1px;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: transparent;
 }
 
+/* Hover original conservé */
 button:hover {
     background-color: #0056b3;
     box-shadow: #0056b3 0 0 10px;
     color: white;
     transition: 0.2s;
     transform: scale(1.05);
+}
+
+/* Responsive : un peu plus aéré sur mobile */
+
+@media (max-width: 600px) {
+  ul {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,28 +1,49 @@
 * {
-    align-items: center;
-    font-family: Outfit, sans-serif;
+  box-sizing: border-box;
+  font-family: Outfit, sans-serif;
+}
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Header */
+
+header {
+  text-align: center;
+  padding: 1.5rem 1rem 0;
 }
 
 h1, h2 {
-    text-align: center;
+  margin: 0.25rem 0;
 }
 
-h1, h2 :hover {
-    color: #0056b3;
-    transition: 0.2s;
-    cursor: pointer;
-    text-shadow: #756bff 1px 0 10px;
+/* Couleurs d’origine */
+h1 {
+  color: #0080ff;
 }
 
-button {
-    font-family: Outfit, sans-serif;
-    cursor: pointer;
-    border: royalblue 2px solid;
+h2 {
+  color: #0e3863;
 }
 
-button:hover {
-    background-color: #0080ff;
-    color: white;
-    transition: 0.2s;
-    transform: scale(1.05);
+/* Hover d’origine (je les garde) */
+h1:hover,
+h2:hover {
+  color: #0056b3;
+  transition: 0.2s;
+  cursor: pointer;
+  text-shadow: #756bff 1px 0 10px;
+}
+
+/* Conteneur principal de la liste */
+
+app-task-list {
+  display: block;
+  max-width: 1200px;
+  margin: 1.5rem auto 2rem;
+  padding: 0 1rem 2rem;
 }
