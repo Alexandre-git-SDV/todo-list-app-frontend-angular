@@ -78,7 +78,7 @@ export class MockTaskApiInterceptor implements HttpInterceptor {
       return of(new HttpResponse({ status: 204 }));
     }
 
-    // Fall back to next
+    // Pour toutes les autres requêtes, continuer le traitement normal
     return _next.handle(req);
   }
 }

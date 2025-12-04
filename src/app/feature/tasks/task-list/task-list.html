@@ -29,9 +29,11 @@
     <app-todo-item
       [task]="task"
       (select)="onTaskSelected(task)"
-      (edit)="updateTaskTitle(task.id, newTitle)"
+      (edit)="updateTaskTitle(task.id, newTitle, task.title)"
       (delete)="deleteTask(task.id)"
       (toggle)="toggleTask(task.id)"
     ></app-todo-item>
   </li>
 </ul>
+<h2> Formulaire </h2>
+<app-task-form></app-task-form>

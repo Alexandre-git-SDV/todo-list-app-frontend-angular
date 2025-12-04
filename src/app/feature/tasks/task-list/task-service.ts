@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
 import { CreateTaskDto } from '../models/create-task-dto';
-import { TaskApiService } from '../service/task-api-service';
+import { TaskApiService } from '../../../core/service/task-api-service';
 import { TaskStore } from '../store/task-store';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -34,8 +35,8 @@ export class TaskService {
     });
   }
 
-  updateTitle(taskId: number, newTitle: string) {
-    this.apiService.updateTitle(taskId, newTitle).subscribe(updatedTasks => {
+  updateTitle(taskId: number, newTitle: string, title: string) {
+    this.apiService.updateTitle(taskId, newTitle, title).subscribe(updatedTasks => {
       this.taskStore.setTasks(updatedTasks);
     });
   }

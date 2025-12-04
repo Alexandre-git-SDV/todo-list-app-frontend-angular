@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../models/task';
-import { TaskState } from '../models/task-state.enum';
+import { Task } from '../../feature/tasks/models/task';
+import { TaskState } from '../../feature/tasks/models/task-state.enum';
 import { Observable, of, switchMap } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 
@@ -51,8 +51,8 @@ export class TaskApiService {
     return this.create(task);
   }
 
-  updateTitle(taskId: number, newTitle: string): Observable<Task[]> {
-    return this.update(taskId, { title: newTitle });
+  updateTitle(taskId: number, newTitle: string, title: string): Observable<Task[]> {
+    return this.update(taskId, { title: newTitle = prompt("Modifier le titre de la tâche", title) || title });
   }
 
   toggleStatus(taskId: number): Observable<Task[]> {

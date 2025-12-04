@@ -7,13 +7,14 @@ import { HttpClient } from '@angular/common/http';
 import { TaskService } from './task-service';
 import { Task } from '../models/task';
 import { TodoItem } from '../todo-item/todo-item';
+import { TaskForm } from "../task-form/task-form";
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   templateUrl: './task-list.html',
   styleUrls: ['./task-list.css'],
-  imports: [CommonModule, FormsModule, TodoItem],
+  imports: [CommonModule, FormsModule, TodoItem, TaskForm],
 })
 export class TaskList {
 
@@ -46,8 +47,8 @@ export class TaskList {
     console.log('Tâche ajoutée :', this.newTaskTitle , this.tasks.length + 1 );
   }
 
-  updateTaskTitle(taskId: number, newTitle: string) {
-    this.taskService.updateTitle(taskId, newTitle);
+  updateTaskTitle(taskId: number, newTitle: string, title: string) {
+    this.taskService.updateTitle(taskId, newTitle, title);
     console.log('Tâche mise à jour :', taskId, newTitle);
   }
 

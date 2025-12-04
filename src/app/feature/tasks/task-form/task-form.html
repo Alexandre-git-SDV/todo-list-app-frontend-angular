@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="task-form">
+    <div>
+        <label for="title">Titre</label><br/>
+        <input id="title" type="text" formControlName="title" placeholder="Ex. Acheter du pain" />
+        <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+            <small *ngIf="form.get('title')?.errors?.['required']">Le titre est requis.</small>
+            <small *ngIf="form.get('title')?.errors?.['minlength']">Le titre doit contenir au moins 3 caractères.</small>
+            <small *ngIf="form.get('title')?.errors?.['forbiddenWord']">Le champ est invalide et le titre ne peut pas être "test".</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="description">Description</label><br/>
+        <textarea id="description" formControlName="description" placeholder="Description (optionnelle)"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Créer</button>
+</form>
