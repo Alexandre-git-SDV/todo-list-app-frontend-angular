@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { TaskService } from './task-service';
-import { Task } from '../../models/task';
+import { Task } from '../models/task';
 import { TodoItem } from '../todo-item/todo-item';
 
 @Component({

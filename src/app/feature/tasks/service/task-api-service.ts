@@ -1,62 +1,61 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../../models/task';
-import { TaskState } from '../../models/task-state.enum';
-import { delay, Observable, of, pipe } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Task } from '../models/task';
+import { TaskState } from '../models/task-state.enum';
+import { Observable, of, switchMap } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskApiService {
+  constructor(private http: HttpClient) {}
 
-  private tasks: Task[] = [
-    { id: 1, title: 'Réécrire', status: 'à faire' },
-    { id: 2, title: 'Tourner', status: 'à faire' },
-    { id: 3, title: 'Monter', status: 'à faire' },
-    { id: 4, title: 'Poster', status: 'à faire' },
-  ];
-  
+  // HTTP-backed methods
+  getAll(): Observable<Task[]> {
+    return this.http.get<Task[]>('/api/tasks');
+  }
+
+  create(task: { title: string }): Observable<Task[]> {
+    return this.http.post<Task[]>('/api/tasks', task, { observe: 'response' }).pipe(
+      switchMap((res: HttpResponse<Task[]>) => {
+        if (res.status === 201 && res.body) return of(res.body);
+        return this.getAll();
+      })
+    );
+  }
+
+  update(taskId: number, body: any): Observable<Task[]> {
+    return this.http.put<Task[]>(`/api/tasks/${taskId}`, body, { observe: 'response' }).pipe(
+      switchMap((res: HttpResponse<Task[]>) => {
+        if (res.status === 200 && res.body) return of(res.body);
+        return this.getAll();
+      })
+    );
+  }
+
+  delete(taskId: number): Observable<Task[]> {
+    return this.http.delete(`/api/tasks/${taskId}`, { observe: 'response' }).pipe(
+      switchMap((res: HttpResponse<any>) => {
+        if (res.status === 204) return this.getAll();
+        return this.getAll();
+      })
+    );
+  }
+
+  // backward-compatible wrappers used by existing services/components
   getAllTasks(): Observable<Task[]> {
-      return of([...this.tasks]);
-    }
-  
-    add(task: { title: string }): Observable<Task[]> {
-      const newTask: Task = {
-        id: this.tasks.length + 1,
-        title: task.title,
-        status: 'à faire',
-      };
-  
-      this.tasks.push(newTask);
-      return of([...this.tasks]);
-    }
-  
-    updateTitle(taskId: number, newTitle: string): Observable<Task[]> {
-      const task = this.tasks.find(t => t.id === taskId);
-      if (task) task.title = prompt("Nouveau titre de la tâche :", task.title) || task.title;
-      return of([...this.tasks]).pipe(delay(250));
-    }
-  
-    toggleStatus(taskId: number): Observable<Task[]> {
-      const task = this.tasks.find(t => t.id === taskId);
-      if (!task) return of([...this.tasks]).pipe(delay(250));
-  
-      switch (task.status) {
-        case TaskState.ToDo:
-          task.status = TaskState.InProgress;
-          break;
-        case TaskState.InProgress:
-          task.status = TaskState.Done;
-          break;
-        case TaskState.Done:
-          task.status = TaskState.ToDo;
-          break;
-      }
-      return of([...this.tasks]).pipe(delay(250));
-    }
-  
-    delete(taskId: number): Observable<Task[]> {
-      this.tasks = this.tasks.filter(t => t.id !== taskId);
-      return of([...this.tasks]);
-    } 
+    return this.getAll();
+  }
+
+  add(task: { title: string }): Observable<Task[]> {
+    return this.create(task);
+  }
+
+  updateTitle(taskId: number, newTitle: string): Observable<Task[]> {
+    return this.update(taskId, { title: newTitle });
+  }
+
+  toggleStatus(taskId: number): Observable<Task[]> {
+    return this.update(taskId, { action: 'toggle' });
+  }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../../models/task';
-import { CreateTaskDto } from '../../models/create-task-dto';
+import { Task } from '../models/task';
+import { CreateTaskDto } from '../models/create-task-dto';
 import { TaskApiService } from '../service/task-api-service';
 import { TaskStore } from '../store/task-store';
 
