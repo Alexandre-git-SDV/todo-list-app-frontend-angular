@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from '../models/task';
+import { Task } from '../../models/task';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
