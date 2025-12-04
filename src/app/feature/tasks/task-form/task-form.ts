@@ -1,13 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 import { TaskService } from '../task-list/task-service';
+import { CreateTaskDto } from '../models/create-task-dto';
 import { Task } from '../models/task';
-import { TodoItem } from '../todo-item/todo-item';
-import { Title } from '@angular/platform-browser';
 import { notTestValidator } from '../../../shared/own-validators';
 
 @Component({
@@ -17,7 +14,6 @@ import { notTestValidator } from '../../../shared/own-validators';
   styleUrls: ['./task-form.css'],
 })
 export class TaskForm {
-  @Output() taskCreated = new EventEmitter<{ title: string; description?: string }>();
 
   form: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3), notTestValidator]),
@@ -34,10 +30,10 @@ export class TaskForm {
 
     const value = this.form.value as { title: string; description?: string };
     // call service to add task (only title is required by API)
-    this.taskService.add({ title: value.title });
 
     // still emit local event for parent components
-    this.taskCreated.emit(value);
+    const dto : CreateTaskDto = this.form.value;
+    this.taskService.add(dto)
     console.log('Formulaire validée et envoi de la requête d\'ajout', value);
     this.form.reset();
   }

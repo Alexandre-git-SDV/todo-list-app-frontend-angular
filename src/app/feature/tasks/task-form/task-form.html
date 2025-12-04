@@ -2,11 +2,19 @@
     <div>
         <label for="title">Titre</label><br/>
         <input id="title" type="text" formControlName="title" placeholder="Ex. Acheter du pain" />
-        <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
-            <small *ngIf="form.get('title')?.errors?.['required']">Le titre est requis.</small>
-            <small *ngIf="form.get('title')?.errors?.['minlength']">Le titre doit contenir au moins 3 caractères.</small>
-            <small *ngIf="form.get('title')?.errors?.['forbiddenWord']">Le champ est invalide et le titre ne peut pas être "test".</small>
-        </div>
+        @if (form.get('title')?.touched && form.get('title')?.invalid) {
+            <div class="error">
+                @if (form.get('title')?.errors?.['required']) {
+                    <small>Le titre est requis.</small>
+                }
+                @if (form.get('title')?.errors?.['minlength']) {
+                    <small>Le titre doit contenir au moins 3 caractères.</small>
+                }
+                @if (form.get('title')?.errors?.['forbiddenWord']) {
+                    <small>Le champ est invalide et le titre ne peut pas être "test".</small>
+                }
+            </div>
+        }
     </div>
 
     <div>
