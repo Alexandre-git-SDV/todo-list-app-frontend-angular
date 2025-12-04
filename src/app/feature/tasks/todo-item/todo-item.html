@@ -3,11 +3,6 @@
   <button (click)="onToggle()"> Action </button>
   <button (click)="onEdit()"> Modifier </button>
   <small>Statut : {{ task.status }}</small> <!--task.status ? 'Terminée' : 'En cours'-->
+  <button routerLink="/tasks/{{task.id}}"> Détails </button>
   <button class="delete" (click)="onDelete()"> Supprimer </button>
 </div>
-
-
-<!-- <span
-    class="title"
-    [class.done]="task.status">
-  </span> -->

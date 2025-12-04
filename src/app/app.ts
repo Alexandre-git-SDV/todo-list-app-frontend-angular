@@ -1,12 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TaskList } from './feature/tasks/task-list/task-list';
-import { TodoItem } from './feature/tasks/todo-item/todo-item';
-import { TaskForm } from "./feature/tasks/task-form/task-form";
+import { Navbar } from './shared/navbar/navbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TaskList, TaskForm],
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

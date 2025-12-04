@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../models/task';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-todo-item',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './todo-item.html',
   styleUrl: './todo-item.css',
 })

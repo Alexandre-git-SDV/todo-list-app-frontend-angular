@@ -23,4 +23,5 @@ body {
   background: var(--bg-color);
   color: var(--text-color);
   transition: background 0.25s linear, color 0.25s linear;
+  font-family: Outfit, sans-serif;
 }
